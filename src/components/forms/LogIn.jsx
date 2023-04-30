@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { openLogIn, hideLogIn } from "../redux/modalStateSlice";
+import { openLogIn, hideLogIn } from "../../redux/modalStateSlice";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
