@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { hideRegister } from "../../redux/modalStateSlice";
 import { Dialog, Transition } from "@headlessui/react";
@@ -106,7 +106,6 @@ export default function Register() {
 														/>
 														<p className="text-sm text-red-main">{errors.emailAddress?.message}</p>
 													</div>
-
 													<div className="col-span-6">
 														<label htmlFor="password" className="block text-sm font-medium leading-6 text-blue-main">
 															<span className="text-red-main">* </span>
@@ -114,7 +113,7 @@ export default function Register() {
 														</label>
 														<input
 															{...register("password")}
-															type="text"
+															type="password"
 															name="password"
 															id="password"
 															className="mt-2 block w-full rounded-md border-0 p-1.5 text-blue-main shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-gray-400 sm:text-sm sm:leading-6"

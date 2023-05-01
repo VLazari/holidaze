@@ -1,6 +1,7 @@
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { openLogIn, openRegister } from "../redux/modalStateSlice";
+import { removeLoggedUser } from "../redux/loggedUserSlice";
 import LogIn from "./forms/LogIn";
 import Register from "./forms/Register";
 import { Menu, Transition } from "@headlessui/react";
@@ -11,6 +12,8 @@ function classNames(...classes) {
 }
 
 export default function DropMenu() {
+	const isLogIn = useSelector((state) => state.isLoggedIn.isLogIn);
+	const userData = useSelector((state) => state.isLoggedIn.userData);
 	const dispatch = useDispatch();
 
 	return (
@@ -33,68 +36,42 @@ export default function DropMenu() {
 			>
 				<Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 					<div className="py-1 cursor-pointer">
-						<Menu.Item>
-							{({ active }) => (
-								<div
-									onClick={() => dispatch(openLogIn())}
-									className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
-								>
-									Log in
-								</div>
-							)}
-						</Menu.Item>
-						<Menu.Item>
-							{({ active }) => (
-								<div
-									onClick={() => dispatch(openRegister())}
-									className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
-								>
-									Sign up
-								</div>
-							)}
-						</Menu.Item>
+						{!isLogIn ? (
+							<Fragment>
+								<Menu.Item>
+									{({ active }) => (
+										<div
+											onClick={() => dispatch(openLogIn())}
+											className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
+										>
+											Log in
+										</div>
+									)}
+								</Menu.Item>
+								<Menu.Item>
+									{({ active }) => (
+										<div
+											onClick={() => dispatch(openRegister())}
+											className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
+										>
+											Sign up
+										</div>
+									)}
+								</Menu.Item>
+							</Fragment>
+						) : (
+							<Menu.Item>
+								{({ active }) => (
+									<div
+										onClick={() => dispatch(removeLoggedUser())}
+										className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
+									>
+										Log out
+									</div>
+								)}
+							</Menu.Item>
+						)}
 					</div>
-					{/* <div className="py-1">
-						<Menu.Item>
-							{({ active }) => (
-								<a href="#" className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}>
-									Archive
-								</a>
-							)}
-						</Menu.Item>
-						<Menu.Item>
-							{({ active }) => (
-								<a href="#" className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}>
-									Move
-								</a>
-							)}
-						</Menu.Item>
-					</div>
-					<div className="py-1">
-						<Menu.Item>
-							{({ active }) => (
-								<a href="#" className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}>
-									Share
-								</a>
-							)}
-						</Menu.Item>
-						<Menu.Item>
-							{({ active }) => (
-								<a href="#" className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}>
-									Add to favorites
-								</a>
-							)}
-						</Menu.Item>
-					</div>
-					<div className="py-1">
-						<Menu.Item>
-							{({ active }) => (
-								<a href="#" className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}>
-									Delete
-								</a>
-							)}
-						</Menu.Item>
-					</div> */}
 				</Menu.Items>
 			</Transition>
 			<LogIn />
