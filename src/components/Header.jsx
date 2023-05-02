@@ -1,5 +1,5 @@
 import React from "react";
-import DropMenu from "./DropMenu";
+import DropMenu from "./ui/DropMenu";
 import Logo from "../assets/Logo.gif";
 
 function Header() {

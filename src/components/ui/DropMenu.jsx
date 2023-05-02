@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { openLogIn, openRegister } from "../redux/modalStateSlice";
-import { removeLoggedUser } from "../redux/loggedUserSlice";
-import LogIn from "./forms/LogIn";
-import Register from "./forms/Register";
+import { openLogIn, openRegister } from "../../redux/modalStateSlice";
+import { removeLoggedUser } from "../../redux/loggedUserSlice";
+import LogIn from "../form/LogIn";
+import Register from "../form/Register";
 import { Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon, Bars3Icon } from "@heroicons/react/24/solid";
 
@@ -20,8 +20,14 @@ export default function DropMenu() {
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
 				<Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-xl bg-red-main px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset ring-white focus:outline-none hover:ring-blue-main">
-					<Bars3Icon className="h-6 w-6 text-white" />
-					<UserCircleIcon className="h-8 w-8 text-white" />
+					{userData.name ? <p className="text-blue-main">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
+					{userData.avatar ? (
+						<div
+							className={`h-8 w-8 border rounded-full border-white bg-[url("${userData.avatar}")] bg-no-repeat bg-center bg-cover`}
+						></div>
+					) : (
+						<UserCircleIcon className="h-8 w-8 text-white" />
+					)}
 				</Menu.Button>
 			</div>
 

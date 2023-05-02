@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
@@ -11,10 +11,10 @@ export default {
 					main: "#2f455f",
 				},
 				gold: {
-					new: "#ffbf41",
+					main: "#ffbf41",
 				},
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/aspect-ratio")],
 };
