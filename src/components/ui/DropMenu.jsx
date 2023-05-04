@@ -19,8 +19,8 @@ export default function DropMenu() {
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
-				<Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-xl bg-red-main px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset ring-white focus:outline-none hover:ring-blue-main">
-					{userData.name ? <p className="text-blue-main">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
+				<Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-xl bg-blue-main px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset ring-white focus:outline-none hover:ring-2">
+					{userData.name ? <p className="text-red-main">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
 					{userData.avatar ? (
 						<div
 							className={`h-8 w-8 border rounded-full border-white bg-[url("${userData.avatar}")] bg-no-repeat bg-center bg-cover`}
@@ -48,7 +48,7 @@ export default function DropMenu() {
 									{({ active }) => (
 										<div
 											onClick={() => dispatch(openLogIn())}
-											className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
+											className={classNames(active ? "bg-blue-main text-white" : "text-gray-700", "block px-4 py-2 text-sm")}
 										>
 											Log in
 										</div>
@@ -58,7 +58,7 @@ export default function DropMenu() {
 									{({ active }) => (
 										<div
 											onClick={() => dispatch(openRegister())}
-											className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
+											className={classNames(active ? "bg-blue-main text-white" : "text-gray-700", "block px-4 py-2 text-sm")}
 										>
 											Sign up
 										</div>
@@ -70,7 +70,7 @@ export default function DropMenu() {
 								{({ active }) => (
 									<div
 										onClick={() => dispatch(removeLoggedUser())}
-										className={classNames(active ? "bg-blue-main text-red-main" : "text-gray-700", "block px-4 py-2 text-sm")}
+										className={classNames(active ? "bg-blue-main text-white" : "text-gray-700", "block px-4 py-2 text-sm")}
 									>
 										Log out
 									</div>

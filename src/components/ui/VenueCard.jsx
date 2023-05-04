@@ -23,14 +23,12 @@ export default function venueCard(props) {
 									<HomeModernIcon className="h-full w-full object-cover object-center border group-hover:opacity-75 group-hover:border-blue-main" />
 								)}
 							</div>
-							<h3 className="mt-4 text-md text-blue-main">
-								{venue.location.country || venue.location.city
-									? `${venue.location.country}, ${venue.location.city}`
-									: "Unknown, Unknown"}
+							<h3 className="mt-4 text-md font-bold text-blue-main">
+								{venue.location.country}, {venue.location.city}
 							</h3>
-							<h4 className="mt-1 text-sm text-blue-main">{venue.name}</h4>
+							<h4 className="my-1 text-sm text-blue-main">{venue.name}</h4>
 							<StarAverageRating rating={venue.rating} />
-							<p className="mt-1 text-lg font-medium text-blue-main">${venue.price}</p>
+							<p className="mt-1 text-lg text-red-main font-bold text-blue-main">${venue.price}</p>
 						</Link>
 					))}
 				</div>

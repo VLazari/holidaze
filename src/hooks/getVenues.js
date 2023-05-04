@@ -12,7 +12,6 @@ export default function getVenues(url) {
 				setIsLoading(true);
 				const response = await fetch(url);
 				const json = await response.json();
-				console.log("aici");
 				setData(json);
 			} catch (error) {
 				console.log(error);
