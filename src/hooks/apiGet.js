@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function getVenues(url) {
+export default function apiGet(url) {
 	const [data, setData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(true);

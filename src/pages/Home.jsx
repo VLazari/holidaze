@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import getVenues from "../hooks/getVenues";
+import getVenues from "../hooks/apiGet";
 import VenueCard from "../components/ui/VenueCard";
 import Loader from "../components/ui/Loader";
 import SortSelectMenu from "../components/ui/SortSelectMenu";
-import { useSearchParams } from "react-router-dom";
 
 export default function Home() {
 	const [sortBy, setSortBy] = useState({ id: 1, name: "Date", sortValue: "created" });

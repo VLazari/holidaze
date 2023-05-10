@@ -22,9 +22,9 @@ export default function DropMenu() {
 				<Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-xl bg-blue-main px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset ring-white focus:outline-none hover:ring-2">
 					{userData.name ? <p className="text-red-main">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
 					{userData.avatar ? (
-						<div
-							className={`h-8 w-8 border rounded-full border-white bg-[url("${userData.avatar}")] bg-no-repeat bg-center bg-cover`}
-						></div>
+						<div className={`h-8 w-8 border rounded-full border-white`}>
+							<img src={userData.avatar} alt="Home image" className="h-full w-full object-cover object-center rounded-full" />
+						</div>
 					) : (
 						<UserCircleIcon className="h-8 w-8 text-white" />
 					)}
