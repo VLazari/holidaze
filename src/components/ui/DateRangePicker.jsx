@@ -34,7 +34,7 @@ export default function DateRangePicker({ venueBookings, getDateRange }) {
 				onChange={(update) => {
 					setDateRange(update);
 				}}
-				monthsShown={2}
+				monthsShown={1}
 				filterDate={isDisabled}
 				placeholderText="Select dates"
 			/>

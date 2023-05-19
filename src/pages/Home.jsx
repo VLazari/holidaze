@@ -11,7 +11,6 @@ export default function Home() {
 	if (isLoading) {
 		return <Loader />;
 	}
-
 	if (error) {
 		return <div>Error: {error.message}</div>;
 	}

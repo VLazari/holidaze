@@ -2,6 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Venue from "./pages/Venue";
+import ManageVenue from "./pages/ManageVenue";
+import Account from "./pages/Account";
+import UserVenues from "./pages/UserVenues";
 
 function App() {
 	return (
@@ -9,9 +12,9 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/venue/:id" element={<Venue />} />
-				{/* <Route path="/checkout" element={<Checkout />} />
-				<Route path="/contact" element={<Contact />} />
-				<Route path="/success" element={<Success />} /> */}
+				<Route path="/profiles/:name/venues" element={<UserVenues />} />
+				<Route path="/profile/:name" element={<Account />} />
+				<Route path="/venue/:id/manage" element={<ManageVenue />} />
 			</Routes>
 		</Layout>
 	);

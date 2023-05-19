@@ -71,7 +71,7 @@ export default function LogIn() {
 										<div className="overflow-hidden shadow sm:rounded-md">
 											<div className="px-4 py-5 sm:p-6">
 												<div className="grid grid-cols-6 gap-6">
-													<div className="col-span-6 sm:col-span-4">
+													<div className="col-span-6">
 														<label htmlFor="emailAddress" className="block text-sm font-medium leading-6 text-blue-main">
 															<span className="text-red-main">* </span>
 															Email address

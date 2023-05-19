@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { openLogIn, openRegister } from "../../redux/modalStateSlice";
 import { removeLoggedUser } from "../../redux/loggedUserSlice";
@@ -23,7 +24,7 @@ export default function DropMenu() {
 					{userData.name ? <p className="text-red-main">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
 					{userData.avatar ? (
 						<div className={`h-8 w-8 border rounded-full border-white`}>
-							<img src={userData.avatar} alt="Home image" className="h-full w-full object-cover object-center rounded-full" />
+							<img src={userData.avatar} alt="Avatar image" className="h-full w-full object-cover object-center rounded-full" />
 						</div>
 					) : (
 						<UserCircleIcon className="h-8 w-8 text-white" />
@@ -44,21 +45,27 @@ export default function DropMenu() {
 					<div className="py-1 cursor-pointer">
 						{!isLogIn ? (
 							<Fragment>
-								<Menu.Item>
+								<Menu.Item className="m-1">
 									{({ active }) => (
 										<div
 											onClick={() => dispatch(openLogIn())}
-											className={classNames(active ? "bg-blue-main text-white" : "text-gray-700", "block px-4 py-2 text-sm")}
+											className={classNames(
+												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+												"block px-4 py-2 text-sm"
+											)}
 										>
 											Log in
 										</div>
 									)}
 								</Menu.Item>
-								<Menu.Item>
+								<Menu.Item className="m-1">
 									{({ active }) => (
 										<div
 											onClick={() => dispatch(openRegister())}
-											className={classNames(active ? "bg-blue-main text-white" : "text-gray-700", "block px-4 py-2 text-sm")}
+											className={classNames(
+												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+												"block px-4 py-2 text-sm"
+											)}
 										>
 											Sign up
 										</div>
@@ -66,16 +73,64 @@ export default function DropMenu() {
 								</Menu.Item>
 							</Fragment>
 						) : (
-							<Menu.Item>
-								{({ active }) => (
-									<div
-										onClick={() => dispatch(removeLoggedUser())}
-										className={classNames(active ? "bg-blue-main text-white" : "text-gray-700", "block px-4 py-2 text-sm")}
-									>
-										Log out
-									</div>
+							<Fragment>
+								<Menu.Item className="m-1">
+									{({ active }) => (
+										<Link
+											to={`/profile/${userData.name}`}
+											className={classNames(
+												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+												"block px-4 py-2 text-sm"
+											)}
+										>
+											Account
+										</Link>
+									)}
+								</Menu.Item>
+								<hr />
+								{userData.venueManager && (
+									<Menu.Item className="m-1">
+										{({ active }) => (
+											<Link
+												to={`/profiles/${userData.name}/venues`}
+												className={classNames(
+													active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+													"block px-4 py-2 text-sm"
+												)}
+											>
+												Venues
+											</Link>
+										)}
+									</Menu.Item>
 								)}
-							</Menu.Item>
+								<Menu.Item className="m-1">
+									{({ active }) => (
+										<Link
+											to={`/venue/null/manage`}
+											className={classNames(
+												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+												"block px-4 py-2 text-sm"
+											)}
+										>
+											Add venue
+										</Link>
+									)}
+								</Menu.Item>
+								<hr />
+								<Menu.Item className="m-1">
+									{({ active }) => (
+										<div
+											onClick={() => dispatch(removeLoggedUser())}
+											className={classNames(
+												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+												"block px-4 py-2 text-sm"
+											)}
+										>
+											Log out
+										</div>
+									)}
+								</Menu.Item>
+							</Fragment>
 						)}
 					</div>
 				</Menu.Items>

@@ -15,6 +15,10 @@ export const loggedUserSlice = createSlice({
 			state.userData = { ...actions.payload };
 			setItem("user", state.userData);
 		},
+		updateLoggedUser: (state, actions) => {
+			state.userData = { ...actions.payload };
+			setItem("user", state.userData);
+		},
 		removeLoggedUser: (state) => {
 			state.isLogIn = false;
 			state.userData = {};
@@ -23,6 +27,6 @@ export const loggedUserSlice = createSlice({
 	},
 });
 
-export const { setLoggedUser, removeLoggedUser } = loggedUserSlice.actions;
+export const { setLoggedUser, updateLoggedUser, removeLoggedUser } = loggedUserSlice.actions;
 
 export default loggedUserSlice.reducer;
