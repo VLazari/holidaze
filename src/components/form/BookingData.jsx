@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import apiBookVenue from "../../utils/api/apiPostData";
 import DateRangePicker from "../ui/DateRangePicker";
@@ -68,15 +69,12 @@ export default function BookingData({ venue }) {
 				<p className="pt-3 text-xl font-semibold tracking-tight text-blue-main">
 					<span className="text-md text-gray-500">Total payed: </span> ${totalPrice}
 				</p>
-				<button
-					type="submit"
-					className={`mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1 ${
-						isLogIn ? "" : "hidden"
-					}`}
-					onClick={() => (isError ? setShowError("flex") : bookVenue())}
+				<Link
+					to={`/profile/${response.name}`}
+					className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
 				>
-					Book now
-				</button>
+					View booking
+				</Link>
 			</section>
 		);
 	}

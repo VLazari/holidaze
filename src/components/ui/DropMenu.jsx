@@ -106,7 +106,7 @@ export default function DropMenu() {
 								<Menu.Item className="m-1">
 									{({ active }) => (
 										<Link
-											to={`/venue/null/manage`}
+											to={`/venue/add`}
 											className={classNames(
 												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
 												"block px-4 py-2 text-sm"

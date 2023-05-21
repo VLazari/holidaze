@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import apiPostData from "../utils/api/apiPostData";
 
 const schema = yup
 	.object({
@@ -13,8 +15,8 @@ const schema = yup
 		guests: yup.number().required(),
 		country: yup.string().trim(),
 		city: yup.string().trim(),
-		lat: yup.number(),
-		lon: yup.number(),
+		lat: yup.number().min(-90, "Minimum latitude is: -90").max(90, "Maximum latitude is: 90"),
+		lon: yup.number().min(-180, "Minimum longitude is: -180").max(180, "Maximum longitude is: 180"),
 		wifi: yup.boolean(),
 		parking: yup.boolean(),
 		breakfast: yup.boolean(),
@@ -22,31 +24,51 @@ const schema = yup
 	})
 	.required();
 
-export default function ManageVenue() {
+export default function AddVenue() {
+	const userData = useSelector((state) => state.isLoggedIn.userData);
 	const [nrOfImages, setNrOfImages] = useState(1);
-	const { id } = useParams();
-	// console.log(id);
-
+	const [isError, setIsError] = useState(false);
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
-		reset,
 		formState: { errors },
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = async (data) => {
+		const option = {
+			name: data.venueName,
+			description: data.description,
+			price: data.price,
+			maxGuests: data.guests,
+			rating: Math.floor(Math.random() * 5) + 1,
+			meta: {
+				wifi: data.wifi,
+				parking: data.parking,
+				breakfast: data.breakfast,
+				pets: data.pets,
+			},
+			location: {
+				country: data.country,
+				lat: data.lat,
+				lng: data.lon,
+			},
+		};
+		const images = data.venueImage.filter((image) => image !== "");
+		if (images.length > 0) option.media = images;
+		if (data.city !== "") option.city = data.city;
+		const response = await apiPostData("https://api.noroff.dev/api/v1/holidaze/venues", option);
+		response && response.id ? navigate(`/profiles/${userData.name}/venues`) : setIsError(true);
 	};
 
 	return (
 		<form className="p-2 md:p-5" onSubmit={handleSubmit(onSubmit)}>
 			<div className="space-y-12 p-5">
 				<div className="border-b border-gray-900/10 pb-12">
-					<h1 className="text-center font-bold leading-7 text-blue-main">{id ? "Add" : "Edit"} venue</h1>
+					<h1 className="text-center font-bold leading-7 text-blue-main">Add venue</h1>
 					<p className="mt-5 text-sm leading-6 text-gray-600">Complete the form with your venue information.</p>
-
 					<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 						<div className="sm:col-span-4">
 							<label htmlFor="venueName" className="block text-sm font-medium leading-6 text-gray-900">
@@ -61,14 +83,13 @@ export default function ManageVenue() {
 										name="venueName"
 										id="venueName"
 										autoComplete="venueName"
-										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 										placeholder="Venue name"
+										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 									/>
 								</div>
 								<p className="text-sm text-red-main">{errors.venueName?.message}</p>
 							</div>
 						</div>
-
 						<div className="col-span-full">
 							<label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
 								Description
@@ -82,17 +103,14 @@ export default function ManageVenue() {
 									placeholder="Short description of the venue"
 									rows={3}
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-main sm:text-sm sm:leading-6"
-									defaultValue={""}
 								/>
 							</div>
 							<p className="text-sm text-red-main">{errors.description?.message}</p>
 						</div>
 					</div>
 				</div>
-
 				<div className="border-b border-gray-900/10 pb-12">
 					<h2 className="text-base font-semibold leading-7 text-gray-900">Add venue photos</h2>
-
 					{Array.from({ length: nrOfImages }, (_, index) => (
 						<div key={index} className="mt-5 sm:col-span-4">
 							<label htmlFor={`venueImage${index}`} className="block text-sm font-medium leading-6 text-gray-900">
@@ -105,8 +123,8 @@ export default function ManageVenue() {
 										type="text"
 										name={`venueImage[${index}]`}
 										id={`venueImage[${index}]`}
-										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 										placeholder="Image URL"
+										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 									/>
 								</div>
 								<p className="text-sm text-red-main">{errors.venueImage?.[index]?.message}</p>
@@ -121,11 +139,9 @@ export default function ManageVenue() {
 						Add more photos
 					</button>
 				</div>
-
 				<div className="border-b border-gray-900/10 pb-12">
 					<h2 className="text-base font-semibold leading-7 text-gray-900">Specifics</h2>
 					<p className="mt-1 text-sm leading-6 text-gray-600">Set price, maximum number of guests and location.</p>
-
 					<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 						<div className="sm:col-span-3">
 							<label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
@@ -140,14 +156,12 @@ export default function ManageVenue() {
 										type="text"
 										name="price"
 										id="price"
-										autoComplete="price"
-										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
 									/>
 								</div>
 								<p className="text-sm text-red-main">{errors.price?.message}</p>
 							</div>
 						</div>
-
 						<div className="sm:col-span-3">
 							<label htmlFor="guests" className="block text-sm font-medium leading-6 text-gray-900">
 								Maximum number of guests
@@ -166,7 +180,6 @@ export default function ManageVenue() {
 								</select>
 							</div>
 						</div>
-
 						<div className="sm:col-span-3">
 							<label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
 								Country
@@ -188,7 +201,6 @@ export default function ManageVenue() {
 								</select>
 							</div>
 						</div>
-
 						<div className="sm:col-span-2 sm:col-start-1">
 							<label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
 								City
@@ -204,7 +216,6 @@ export default function ManageVenue() {
 								/>
 							</div>
 						</div>
-
 						<div className="sm:col-span-2">
 							<label htmlFor="lat" className="block text-sm font-medium leading-6 text-gray-900">
 								Latitude
@@ -212,17 +223,15 @@ export default function ManageVenue() {
 							<div className="mt-2">
 								<input
 									{...register("lat")}
-									type="text"
+									type="number"
 									name="lat"
 									id="lat"
 									defaultValue={0}
-									autoComplete="lat"
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-main sm:text-sm sm:leading-6"
 								/>
 							</div>
 							<p className="text-sm text-red-main">{errors.lat?.message}</p>
 						</div>
-
 						<div className="sm:col-span-2">
 							<label htmlFor="lon" className="block text-sm font-medium leading-6 text-gray-900">
 								Longitude
@@ -230,7 +239,7 @@ export default function ManageVenue() {
 							<div className="mt-2">
 								<input
 									{...register("lon")}
-									type="text"
+									type="number"
 									name="lon"
 									id="lon"
 									defaultValue={0}
@@ -238,14 +247,13 @@ export default function ManageVenue() {
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-main sm:text-sm sm:leading-6"
 								/>
 							</div>
+							<p className="text-sm text-red-main">{errors.lon?.message}</p>
 						</div>
 					</div>
 				</div>
-
 				<div className="border-b border-gray-900/10 pb-12">
 					<h2 className="text-base font-semibold leading-7 text-gray-900">Features</h2>
 					<p className="mt-1 text-sm leading-6 text-gray-600">Are any of the below features included.</p>
-
 					<div className="mt-10 space-y-10">
 						<fieldset>
 							<legend className="text-sm font-semibold leading-6 text-gray-900">Features</legend>
@@ -322,15 +330,18 @@ export default function ManageVenue() {
 						</fieldset>
 					</div>
 				</div>
+				{isError && (
+					<p className="text-center text-md font-semibold text-red-main">
+						Something went wrong, please check the data you entered and try again
+					</p>
+				)}
 			</div>
-
 			<div className="my-5 flex items-center justify-end gap-x-6">
 				<button
 					type="submit"
-					className="mx-auto flex w-full md:w-8/12 items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
-					// className="rounded-md bg-red-main px-3 py-2 text-sm font-semibold text-white shadow-sm hover:ring-2 hover:ring-red-main ring-offset-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-main"
+					className="mx-auto flex w-11/12 md:w-8/12 items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
 				>
-					{id ? "Add" : "Edit"} venue
+					Add venue
 				</button>
 			</div>
 		</form>
