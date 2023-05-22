@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import { HomeModernIcon } from "@heroicons/react/24/solid";
@@ -9,7 +10,6 @@ import apiDelete from "../utils/api/apiDelete";
 import Loader from "../components/ui/Loader";
 import VenuePreview from "../components/ui/VenuePreview";
 import EditVenue from "../components/ui/EditVenue";
-
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
@@ -19,7 +19,10 @@ export default function UserVenues() {
 	const [open, setOpen] = useState(false);
 	const [preview, setPreview] = useState(null);
 	const [deleteError, setDeleteError] = useState(false);
-	const { data, isLoading, error } = apiAuthGet(`https://api.noroff.dev/api/v1/holidaze/profiles/${userData.name}/venues`, reloadApi);
+	const { data, isLoading, error } = apiAuthGet(
+		`https://api.noroff.dev/api/v1/holidaze/profiles/${userData.name}/venues?_bookings=true`,
+		reloadApi
+	);
 	const onDelete = async (id) => {
 		try {
 			await apiDelete(`https://api.noroff.dev/api/v1/holidaze/venues/${id}`);
@@ -82,7 +85,7 @@ export default function UserVenues() {
 			<div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
 				<div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
 					<h1 className="text-xl md:text-3xl text-center font-semibold text-gray-900">Manage your venues</h1>
-					<div className="my-5 flex items-center justify-end">
+					<div className="py-5 flex items-center justify-end border-b-2">
 						<Link
 							to="/venue/add"
 							className="mx-auto flex items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-2 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
@@ -107,7 +110,6 @@ export default function UserVenues() {
 													<HomeModernIcon className="h-full w-full object-cover object-center border group-hover:opacity-75 group-hover:border-blue-main" />
 												)}
 											</div>
-
 											<div className="ml-4 flex flex-1 flex-col">
 												<div>
 													<div className="flex justify-between text-base font-medium text-gray-900">
@@ -117,6 +119,28 @@ export default function UserVenues() {
 													<p className="mt-1 text-sm text-gray-500">{venue.description}</p>
 												</div>
 											</div>
+										</div>
+										<div className="my-2 py-2 border-b-0">
+											{venue.bookings.length < 1 ? (
+												<p className="font-medium text-gray-900">No bookings</p>
+											) : (
+												<>
+													<p className="font-medium text-gray-900">Bookings:</p>
+													{venue.bookings.map((booking) => (
+														<div className="flex items-center">
+															<p className="py-1 mr-3">{booking.guests} guest(s)</p>
+															<p className="text-gray-500 mr-3">
+																<span className="text-gray-900">From: </span>
+																{format(new Date(booking.dateFrom), "dd/MM/yyyy")}
+															</p>
+															<p className="text-gray-500">
+																<span className="text-gray-900">To: </span>
+																{format(new Date(booking.dateTo), "dd/MM/yyyy")}
+															</p>
+														</div>
+													))}
+												</>
+											)}
 										</div>
 										<Disclosure>
 											{({ open }) => (

@@ -23,7 +23,7 @@ export default function MapLeaflet({ venue }) {
 			<Marker position={[lat, lng]} icon={icon}>
 				<Popup>
 					<h2 className="text-blue-main font-semibold">{name}</h2>
-					<div className=" mt-2 h-14 w-full border">
+					<div className=" mt-2 h-full w-full border">
 						<img src={image} alt="Home image" className="h-full w-full object-cover object-center" />
 					</div>
 				</Popup>

@@ -67,7 +67,7 @@ export default function AddVenue() {
 		<form className="p-2 md:p-5" onSubmit={handleSubmit(onSubmit)}>
 			<div className="space-y-12 p-5">
 				<div className="border-b border-gray-900/10 pb-12">
-					<h1 className="text-center font-bold leading-7 text-blue-main">Add venue</h1>
+					<h1 className="text-center text-2xl md:text-4xl font-bold text-blue-main">Add venue</h1>
 					<p className="mt-5 text-sm leading-6 text-gray-600">Complete the form with your venue information.</p>
 					<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 						<div className="sm:col-span-4">

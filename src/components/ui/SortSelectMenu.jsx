@@ -7,26 +7,31 @@ const sortOptions = [
 		id: 1,
 		name: "Date",
 		sortValue: "created",
+		sortOrder: "desc",
 	},
 	{
 		id: 2,
-		name: "Venue name",
-		sortValue: "name",
+		name: "Price (low-high)",
+		sortValue: "price",
+		sortOrder: "asc",
 	},
 	{
 		id: 3,
-		name: "Price",
+		name: "Price (high-low)",
 		sortValue: "price",
+		sortOrder: "desc",
 	},
 	{
 		id: 4,
-		name: "Number of guests",
+		name: "Guests (low-high)",
 		sortValue: "maxGuests",
+		sortOrder: "asc",
 	},
 	{
 		id: 5,
-		name: "Rating",
-		sortValue: "rating",
+		name: "Guests (high-low)",
+		sortValue: "maxGuests",
+		sortOrder: "desc",
 	},
 ];
 
@@ -39,9 +44,9 @@ export default function SortSelectMenu({ selectedOption, onChangeOption }) {
 		<Listbox value={selectedOption} onChange={onChangeOption}>
 			{({ open }) => (
 				<div className="flex items-center mx-3 mt-3">
-					<Listbox.Label className="mr-2 text-md font-bold text-gray-900">Sort by: </Listbox.Label>
+					<Listbox.Label className="mr-2 text-md font-bold text-gray-900">Filter: </Listbox.Label>
 					<div className="relative">
-						<Listbox.Button className="relative w-44 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-2 ring-inset ring-blue-main focus:outline-none focus:ring-2 focus:ring-blue-main sm:text-sm">
+						<Listbox.Button className="relative w-48 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-2 ring-inset ring-blue-main focus:outline-none focus:ring-2 focus:ring-blue-main text-sm">
 							<span className="ml-3 block truncate">{selectedOption.name}</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
 								<ChevronUpDownIcon className="h-5 w-5 text-blue-main" aria-hidden="true" />
@@ -69,7 +74,7 @@ export default function SortSelectMenu({ selectedOption, onChangeOption }) {
 												{selected ? (
 													<span
 														className={classNames(
-															active ? "text-white" : "text-indigo-600",
+															active ? "text-white" : "text-gray-900",
 															"absolute inset-y-0 right-0 flex items-center pr-4"
 														)}
 													>

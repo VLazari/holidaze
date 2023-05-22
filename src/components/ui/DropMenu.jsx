@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Fragment, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { openLogIn, openRegister } from "../../redux/modalStateSlice";
 import { removeLoggedUser } from "../../redux/loggedUserSlice";
@@ -16,12 +16,17 @@ export default function DropMenu() {
 	const isLogIn = useSelector((state) => state.isLoggedIn.isLogIn);
 	const userData = useSelector((state) => state.isLoggedIn.userData);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		!isLogIn && navigate("/");
+	}, [isLogIn]);
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
-				<Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-xl bg-blue-main px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset ring-white focus:outline-none hover:ring-2">
-					{userData.name ? <p className="text-red-main">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
+				<Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-xl bg-slate-800 px-3 py-1 text-sm font-semibold shadow-sm ring-1 ring-inset ring-white focus:outline-none hover:ring-2">
+					{userData.name ? <p className="text-white">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
 					{userData.avatar ? (
 						<div className={`h-8 w-8 border rounded-full border-white`}>
 							<img src={userData.avatar} alt="Avatar image" className="h-full w-full object-cover object-center rounded-full" />
@@ -31,7 +36,6 @@ export default function DropMenu() {
 					)}
 				</Menu.Button>
 			</div>
-
 			<Transition
 				as={Fragment}
 				enter="transition ease-out duration-100"
@@ -89,34 +93,36 @@ export default function DropMenu() {
 								</Menu.Item>
 								<hr />
 								{userData.venueManager && (
-									<Menu.Item className="m-1">
-										{({ active }) => (
-											<Link
-												to={`/profiles/${userData.name}/venues`}
-												className={classNames(
-													active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
-													"block px-4 py-2 text-sm"
-												)}
-											>
-												Venues
-											</Link>
-										)}
-									</Menu.Item>
-								)}
-								<Menu.Item className="m-1">
-									{({ active }) => (
-										<Link
-											to={`/venue/add`}
-											className={classNames(
-												active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
-												"block px-4 py-2 text-sm"
+									<>
+										<Menu.Item className="m-1">
+											{({ active }) => (
+												<Link
+													to={`/profiles/${userData.name}/venues`}
+													className={classNames(
+														active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+														"block px-4 py-2 text-sm"
+													)}
+												>
+													Venues
+												</Link>
 											)}
-										>
-											Add venue
-										</Link>
-									)}
-								</Menu.Item>
-								<hr />
+										</Menu.Item>
+										<Menu.Item className="m-1">
+											{({ active }) => (
+												<Link
+													to={`/venue/add`}
+													className={classNames(
+														active ? "bg-blue-main text-white rounded-lg" : "text-gray-700",
+														"block px-4 py-2 text-sm"
+													)}
+												>
+													Add venue
+												</Link>
+											)}
+										</Menu.Item>
+										<hr />
+									</>
+								)}
 								<Menu.Item className="m-1">
 									{({ active }) => (
 										<div

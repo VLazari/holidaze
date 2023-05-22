@@ -43,7 +43,7 @@ export default function ImageSlider(props) {
 				</div>
 				<div className="flex justify-center flex-wrap">
 					{media.map((img, index) => (
-						<div key={index} className="mx-2 mt-2 h-14 w-14 border" onClick={() => goToImageIndex(index)}>
+						<div key={index} className="mx-2 mt-2 h-14 w-14 border cursor-pointer" onClick={() => goToImageIndex(index)}>
 							<img src={img} alt="Home image" className="h-full w-full object-cover object-center" />
 						</div>
 					))}
