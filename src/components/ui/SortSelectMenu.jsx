@@ -41,10 +41,10 @@ function classNames(...classes) {
 
 export default function SortSelectMenu({ selectedOption, onChangeOption }) {
 	return (
-		<Listbox value={selectedOption} onChange={onChangeOption}>
+		<Listbox value={selectedOption} onChange={onChangeOption} className="flex items-center pb-2">
 			{({ open }) => (
-				<div className="flex items-center mx-3 mt-3">
-					<Listbox.Label className="mr-2 text-md font-bold text-gray-900">Filter: </Listbox.Label>
+				<div className="flex items-center mx-4">
+					<Listbox.Label className="mr-2 text-md font-bold text-white">Filter: </Listbox.Label>
 					<div className="relative">
 						<Listbox.Button className="relative w-48 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-2 ring-inset ring-blue-main focus:outline-none focus:ring-2 focus:ring-blue-main text-sm">
 							<span className="ml-3 block truncate">{selectedOption.name}</span>

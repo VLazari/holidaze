@@ -22,20 +22,20 @@ export default function Home() {
 	}
 	return (
 		<div>
-			<div className="mx-auto max-w-7xl max-h-14 flex flex-col-reverse content-end md:flex-row justify-end md:justify-between items-start w-full">
+			<div className="mx-auto p-2 max-w-7xl flex flex-col-reverse md:flex-row justify-start md:justify-between items-start md:items-center w-full  bg-blue-main rounded-b-2xl">
 				<SortSelectMenu selectedOption={sortBy} onChangeOption={setSortBy} />
-				<span className="flex flex-col items-center p-1 bg-blue-main rounded-b-2xl">
-					<div className="flex items-center rounded-full">
-						<input
-							value={query}
-							onChange={(event) => setQuery(event.target.value)}
-							className="w-80 p-5 py-2 border rounded-full"
-							type="text"
-							placeholder="Search venue..."
-						/>
-						<FontAwesomeIcon className="mx-2 text-xl text-white" icon={faMagnifyingGlass} />
-					</div>
-				</span>
+				{/* <div className="flex flex-col items-center p-1 bg-blue-main rounded-b-2xl"> */}
+				<div className="flex items-center rounded-full px-2 pb-3">
+					<input
+						value={query}
+						onChange={(event) => setQuery(event.target.value)}
+						className="w-80 p-5 py-2 border rounded-full"
+						type="text"
+						placeholder="Search venue..."
+					/>
+					<FontAwesomeIcon className="mx-2 text-xl text-white" icon={faMagnifyingGlass} />
+				</div>
+				{/* </div> */}
 			</div>
 			{searchResults.length < 1 && <div className="py-16 text-slate-900 text-center text-xl sm:text-3xl">No results</div>}
 			<VenueCard venues={searchResults} />
