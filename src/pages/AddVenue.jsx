@@ -73,7 +73,7 @@ export default function AddVenue() {
 						<div className="sm:col-span-4">
 							<label htmlFor="venueName" className="block text-sm font-medium leading-6 text-gray-900">
 								Venue name
-								<span className="text-red-main"> *</span>
+								<span className="text-red-600"> *</span>
 							</label>
 							<div className="mt-2">
 								<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-main sm:max-w-md">
@@ -87,13 +87,13 @@ export default function AddVenue() {
 										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 									/>
 								</div>
-								<p className="text-sm text-red-main">{errors.venueName?.message}</p>
+								<p className="text-sm text-red-600">{errors.venueName?.message}</p>
 							</div>
 						</div>
 						<div className="col-span-full">
 							<label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
 								Description
-								<span className="text-red-main"> *</span>
+								<span className="text-red-600"> *</span>
 							</label>
 							<div className="mt-2">
 								<textarea
@@ -105,7 +105,7 @@ export default function AddVenue() {
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-main sm:text-sm sm:leading-6"
 								/>
 							</div>
-							<p className="text-sm text-red-main">{errors.description?.message}</p>
+							<p className="text-sm text-red-600">{errors.description?.message}</p>
 						</div>
 					</div>
 				</div>
@@ -127,7 +127,7 @@ export default function AddVenue() {
 										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 									/>
 								</div>
-								<p className="text-sm text-red-main">{errors.venueImage?.[index]?.message}</p>
+								<p className="text-sm text-red-600">{errors.venueImage?.[index]?.message}</p>
 							</div>
 						</div>
 					))}
@@ -146,7 +146,7 @@ export default function AddVenue() {
 						<div className="sm:col-span-3">
 							<label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
 								Price / night
-								<span className="text-red-main"> *</span>
+								<span className="text-red-600"> *</span>
 							</label>
 							<div className="mt-2">
 								<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-main sm:max-w-md">
@@ -159,7 +159,7 @@ export default function AddVenue() {
 										className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
 									/>
 								</div>
-								<p className="text-sm text-red-main">{errors.price?.message}</p>
+								<p className="text-sm text-red-600">{errors.price?.message}</p>
 							</div>
 						</div>
 						<div className="sm:col-span-3">
@@ -230,7 +230,7 @@ export default function AddVenue() {
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-main sm:text-sm sm:leading-6"
 								/>
 							</div>
-							<p className="text-sm text-red-main">{errors.lat?.message}</p>
+							<p className="text-sm text-red-600">{errors.lat?.message}</p>
 						</div>
 						<div className="sm:col-span-2">
 							<label htmlFor="lon" className="block text-sm font-medium leading-6 text-gray-900">
@@ -247,7 +247,7 @@ export default function AddVenue() {
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-main sm:text-sm sm:leading-6"
 								/>
 							</div>
-							<p className="text-sm text-red-main">{errors.lon?.message}</p>
+							<p className="text-sm text-red-600">{errors.lon?.message}</p>
 						</div>
 					</div>
 				</div>
@@ -331,7 +331,7 @@ export default function AddVenue() {
 					</div>
 				</div>
 				{isError && (
-					<p className="text-center text-md font-semibold text-red-main">
+					<p className="text-center text-md font-semibold text-red-600">
 						Something went wrong, please check the data you entered and try again
 					</p>
 				)}
@@ -339,7 +339,7 @@ export default function AddVenue() {
 			<div className="my-5 flex items-center justify-end gap-x-6">
 				<button
 					type="submit"
-					className="mx-auto flex w-11/12 md:w-8/12 items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
+					className="mx-auto flex w-11/12 md:w-8/12 items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-gray-900 outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
 				>
 					Add venue
 				</button>

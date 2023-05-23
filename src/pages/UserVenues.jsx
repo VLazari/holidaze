@@ -36,7 +36,7 @@ export default function UserVenues() {
 		return <Loader />;
 	}
 	if (error) {
-		return <div className="mx-auto mt-10 text-red-main text-lg font-bold">Sorry, something went wrong. {error.message}</div>;
+		return <div className="mx-auto mt-10 text-red-600 text-lg font-bold">Sorry, something went wrong. {error.message}</div>;
 	}
 	return (
 		<>
@@ -88,7 +88,7 @@ export default function UserVenues() {
 					<div className="py-5 flex items-center justify-end border-b-2">
 						<Link
 							to="/venue/add"
-							className="mx-auto flex items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-2 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
+							className="mx-auto flex items-center justify-center rounded-md border border-transparent bg-blue-main px-8 py-2 text-base font-medium text-white outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
 						>
 							Add new
 						</Link>
@@ -146,7 +146,7 @@ export default function UserVenues() {
 											{({ open }) => (
 												<>
 													<div className="flex flex-1 justify-end text-sm">
-														{deleteError && <p className="text-sm text-red-main">Something went wrong. Try again.</p>}
+														{deleteError && <p className="text-sm text-red-600">Something went wrong. Try again.</p>}
 														<div className="flex">
 															<button
 																type="button"

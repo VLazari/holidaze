@@ -29,10 +29,13 @@ export default function DropMenu() {
 					{userData.name ? <p className="text-white">{userData.name}</p> : <Bars3Icon className="h-6 w-6 text-white" />}
 					{userData.avatar ? (
 						<div className={`h-8 w-8 border rounded-full border-white`}>
-							<img src={userData.avatar} alt="Avatar image" className="h-full w-full object-cover object-center rounded-full" />
+							<img src={userData.avatar} alt="User's avatar image" className="h-full w-full object-cover object-center rounded-full" />
 						</div>
 					) : (
-						<UserCircleIcon className="h-8 w-8 text-white" />
+						<div>
+							<p className="sr-only">Log in / Register</p>
+							<UserCircleIcon className="h-8 w-8 text-white" />
+						</div>
 					)}
 				</Menu.Button>
 			</div>

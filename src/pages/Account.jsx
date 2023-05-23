@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateLoggedUser } from "../redux/loggedUserSlice";
 import apiAuthGet from "../hooks/apiAuthGet";
@@ -15,21 +14,23 @@ export default function Account() {
 	const [newAvatarUrl, setNewAvatarUrl] = useState("");
 	const { data, isLoading, error } = apiAuthGet(`https://api.noroff.dev/api/v1/holidaze/profiles/${userData.name}?_bookings=true`);
 
-	async function updateUser() {
-		let newData = { ...userData };
+	const updateUser = async () => {
+		let newUserData = { ...userData };
 		const response = await apiPutData(`https://api.noroff.dev/api/v1/holidaze/profiles/${userData.name}/media`, { avatar: newAvatarUrl });
 		if (response.name) {
-			newData.avatar = newAvatarUrl;
-			dispatch(updateLoggedUser(newData));
+			newUserData.avatar = newAvatarUrl;
+			dispatch(updateLoggedUser(newUserData));
 			setUrlError(false);
-		} else setUrlError(true);
-	}
+		} else {
+			setUrlError(true);
+		}
+	};
 
 	if (isLoading) {
 		return <Loader />;
 	}
 	if (error) {
-		return <div className="mx-auto mt-10 text-red-main text-lg font-bold">Sorry, something went wrong. {error.message}</div>;
+		return <div className="mx-auto mt-10 text-red-600 text-lg font-bold">Sorry, something went wrong. {error.message}</div>;
 	}
 	return (
 		<div className="bg-white">
@@ -50,8 +51,9 @@ export default function Account() {
 							<UserCircleIcon className="mx-auto h-44 w-44 text-blue-main" />
 						)}
 						<div className="mt-10 p-3 border">
-							<p className={`text-red-main ${urlError ? "flex" : "hidden"}`}>Please check if you provide a valid URL</p>
+							<p className={`text-red-600 ${urlError ? "flex" : "hidden"}`}>Please check if you provide a valid URL</p>
 							<div className="col-span-6">
+								<label htmlFor="userAvatar">Set new avatar:</label>
 								<input
 									type="text"
 									placeholder="Enter new image URL"
@@ -66,7 +68,7 @@ export default function Account() {
 							</div>
 							<button
 								type="button"
-								className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
+								className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-main px-8 py-3 text-base font-medium text-white outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
 								onClick={() => updateUser()}
 							>
 								Change avatar

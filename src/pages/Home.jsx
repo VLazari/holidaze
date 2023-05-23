@@ -13,7 +13,6 @@ export default function Home() {
 		`https://api.noroff.dev/api/v1/holidaze/venues?sort=${sortBy.sortValue}&sortOrder=${sortBy.sortOrder}`
 	);
 	const { query, setQuery, searchResults } = useSearch(data);
-	// console.log(searchResults);
 	if (isLoading) {
 		return <Loader />;
 	}
@@ -24,19 +23,23 @@ export default function Home() {
 		<div>
 			<div className="mx-auto p-2 max-w-7xl flex flex-col-reverse md:flex-row justify-start md:justify-between items-start md:items-center w-full  bg-blue-main rounded-b-2xl">
 				<SortSelectMenu selectedOption={sortBy} onChangeOption={setSortBy} />
-				{/* <div className="flex flex-col items-center p-1 bg-blue-main rounded-b-2xl"> */}
 				<div className="flex items-center rounded-full px-2 pb-3">
+					<label htmlFor="search" className="sr-only">
+						Search venue
+					</label>
 					<input
+						type="text"
+						id="search"
+						name="search"
 						value={query}
 						onChange={(event) => setQuery(event.target.value)}
 						className="w-80 p-5 py-2 border rounded-full"
-						type="text"
 						placeholder="Search venue..."
 					/>
 					<FontAwesomeIcon className="mx-2 text-xl text-white" icon={faMagnifyingGlass} />
 				</div>
-				{/* </div> */}
 			</div>
+			<h1 className="sr-only">Holidaze - rent your dream home</h1>
 			{searchResults.length < 1 && <div className="py-16 text-slate-900 text-center text-xl sm:text-3xl">No results</div>}
 			<VenueCard venues={searchResults} />
 		</div>

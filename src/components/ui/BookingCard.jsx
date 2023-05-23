@@ -57,7 +57,7 @@ export default function BookingCard({ bookings }) {
 											<div className="flex">
 												<button
 													type="button"
-													className="shadow-sm font-medium text-red-main hover:shadow-md"
+													className="shadow-sm font-semibold text-gray-900 hover:shadow-md bg-red-main"
 													onClick={() => deleteBooking(booking.id)}
 												>
 													Cancel

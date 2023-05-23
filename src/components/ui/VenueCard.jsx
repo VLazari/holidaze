@@ -27,7 +27,9 @@ export default function venueCard({ venues }) {
 							</h3>
 							<h4 className="my-1 text-sm text-blue-main">{venue.name}</h4>
 							<StarAverageRating rating={venue.rating} />
-							<p className="mt-1 text-lg text-red-main font-bold text-blue-main">${venue.price}</p>
+							<p className="mt-1 text-lg font-bold text-blue-main">
+								<span className="text-base text-gray-500">Price/night:</span> ${venue.price}
+							</p>
 						</Link>
 					))}
 				</div>

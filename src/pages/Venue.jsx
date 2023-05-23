@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
 import getVenues from "../hooks/apiGet";
 import Loader from "../components/ui/Loader";
 import ImageSlider from "../components/ui/ImageSlider";

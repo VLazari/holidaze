@@ -82,7 +82,7 @@ export default function BookingData({ venue }) {
 		<section className="mt-5 p-10 border ">
 			<h3 className="pb-6 text-blue-main text-lg font-semibold">Book your dream vacation:</h3>
 			<DateRangePicker venueBookings={venue.bookings} getDateRange={getDateRange} />
-			<p className={`${showError} text-xs text-red-main italic`}>This dates are not available</p>
+			<p className={`${showError} text-xs text-red-600 italic`}>This dates are not available</p>
 			<div className="mx-auto my-8 md:mx-0">
 				<span className="text-gray-500 select-none mr-5">Guests: </span>
 				<button
@@ -110,14 +110,14 @@ export default function BookingData({ venue }) {
 			</p>
 			<button
 				type="submit"
-				className={`mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-blue-main outline-none hover:ring-2 hover:ring-blue-main ring-offset-1 ${
+				className={`mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-gray-900 outline-none hover:ring-2 hover:ring-blue-main ring-offset-1 ${
 					isLogIn ? "" : "hidden"
 				}`}
 				onClick={() => (isError ? setShowError("flex") : bookVenue())}
 			>
 				Book now
 			</button>
-			<div className={!isLogIn ? "flex justify-center text-red-main font-semibold mt-8" : "hidden"}>Please, Log in to book</div>
+			<div className={!isLogIn ? "flex justify-center text-red-600 font-semibold mt-8" : "hidden"}>Please, Log in to book</div>
 		</section>
 	);
 }

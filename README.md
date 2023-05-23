@@ -50,8 +50,8 @@ The live deployment of the application can be accessed at: [https://rad-toffee-4
 ## Acknowledgments
 
 -   Noroff School for providing the project opportunity and guidance.
--   [API Provider Name] for the API integration and documentation.
+-   Noroff School for the API integration and documentation.
 
 ## Contact
 
-For any inquiries or questions, please contact [Viorel Lazari] at [vlazari@gmail.com].
+For any inquiries or questions, please contact Viorel Lazari at vlazari@gmail.com.
