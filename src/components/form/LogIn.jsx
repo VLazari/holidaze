@@ -1,6 +1,6 @@
 import React, { Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hideLogIn } from "../../redux/modalStateSlice";
+import { hideLogIn, openRegister } from "../../redux/modalStateSlice";
 import { setLoggedUser } from "../../redux/loggedUserSlice";
 import { Dialog, Transition } from "@headlessui/react";
 import { useForm } from "react-hook-form";
@@ -113,7 +113,19 @@ export default function LogIn() {
 										</button>
 										<button
 											type="button"
-											className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-blue-main shadow-sm ring-1 ring-inset ring-gray-100 hover:ring-blue-main sm:mt-0 sm:w-auto"
+											className="mt-3 inline-flex w-full justify-center rounded-md bg-red-main px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-100 hover:ring-blue-main sm:mt-0 sm:w-auto"
+											onClick={() => {
+												reset();
+												dispatch(openRegister());
+												dispatch(hideLogIn());
+											}}
+											ref={cancelButtonRef}
+										>
+											Sign up
+										</button>
+										<button
+											type="button"
+											className="mt-3 mr-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-100 hover:ring-blue-main sm:mt-0 sm:w-auto"
 											onClick={() => {
 												reset();
 												dispatch(hideLogIn());

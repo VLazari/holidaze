@@ -17,17 +17,7 @@ export default function ImageSlider(props) {
 		setImageIndex(newIndex);
 	};
 
-	if (media.length === 1) {
-		return (
-			<div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:gap-x-8 lg:px-8">
-				<div className="aspect-h-4 aspect-w-6 lg:aspect-h-2 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-					<img src={media[0]} alt="Home image" className="h-full w-full object-contain object-center" />
-				</div>
-			</div>
-		);
-	}
-
-	if (media.length > 1) {
+	if (media.length) {
 		return (
 			<div className="mx-auto mt-6 max-w-3xl sm:px-6 lg:px-8">
 				<div className="relative mx-auto mt-6 max-w-2xl sm:px-6 lg:px-8 bg-blue-main/25">
@@ -52,9 +42,16 @@ export default function ImageSlider(props) {
 		);
 	} else {
 		return (
-			<div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:gap-x-8 lg:px-8">
-				<div className="aspect-h-4 aspect-w-6 lg:aspect-h-2 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-					<HomeModernIcon className="h-full w-full object-contain object-center" />
+			<div className="mx-auto mt-6 max-w-3xl sm:px-6 lg:px-8">
+				<div className="relative mx-auto mt-6 max-w-2xl sm:px-6 lg:px-8 bg-blue-main/25">
+					<div className="aspect-h-4 aspect-w-6 lg:aspect-h-2 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
+						<HomeModernIcon className="h-full w-full object-contain object-center" />
+					</div>
+				</div>
+				<div className="flex justify-center flex-wrap">
+					<div className="mx-2 mt-2 h-14 w-14 border cursor-pointer" onClick={() => goToImageIndex(index)}>
+						<HomeModernIcon className="h-full w-full object-contain object-center" />
+					</div>
 				</div>
 			</div>
 		);

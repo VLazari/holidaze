@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -339,10 +339,16 @@ export default function AddVenue() {
 			<div className="my-5 flex items-center justify-end gap-x-6">
 				<button
 					type="submit"
-					className="mx-auto flex w-11/12 md:w-8/12 items-center justify-center rounded-md border border-transparent bg-red-main px-8 py-3 text-base font-medium text-gray-900 outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
+					className="mx-auto flex items-center justify-center rounded-md border border-transparent bg-blue-main px-8 py-3 text-base font-medium text-white outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
 				>
 					Add venue
 				</button>
+				<Link
+					to={`/profiles/${userData.name}/venues`}
+					className="mx-auto flex items-center justify-center rounded-md border border-transparent bg-red-main px-12 py-3 text-base font-medium text-gray-900 outline-none hover:ring-2 hover:ring-blue-main ring-offset-1"
+				>
+					Cancel
+				</Link>
 			</div>
 		</form>
 	);
