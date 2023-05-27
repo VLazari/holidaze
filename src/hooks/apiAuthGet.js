@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 /**
  * Custom hock that execute an authorized fetch api using GET method.
@@ -9,35 +9,35 @@ import { useSelector } from "react-redux";
  */
 
 export default function apiAuthGet(url, reload) {
-	const [data, setData] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState(true);
-	const { accessToken } = useSelector((state) => state.isLoggedIn.userData);
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(true);
+  const { accessToken } = useSelector((state) => state.isLoggedIn.userData);
 
-	useEffect(() => {
-		async function fetchData() {
-			try {
-				setError(false);
-				setIsLoading(true);
-				if (url) {
-					const response = await fetch(url, {
-						headers: {
-							"Content-type": "application/json; charset=UTF-8",
-							Authorization: `Bearer ${accessToken}`,
-						},
-					});
-					const json = await response.json();
-					setData(json);
-				}
-			} catch (error) {
-				setIsLoading(false);
-				setError(true);
-				console.log(error);
-			} finally {
-				setIsLoading(false);
-			}
-		}
-		fetchData();
-	}, [url, reload]);
-	return { data, isLoading, error };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setError(false);
+        setIsLoading(true);
+        if (url) {
+          const response = await fetch(url, {
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+          const json = await response.json();
+          setData(json);
+        }
+      } catch (error) {
+        setIsLoading(false);
+        setError(true);
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, [url, reload]);
+  return { data, isLoading, error };
 }
