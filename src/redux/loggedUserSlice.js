@@ -1,32 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getItem, setItem, clearStorage } from "../utils/useLocalStorage";
+import { createSlice } from '@reduxjs/toolkit';
+import { getItem, setItem, clearStorage } from '../utils/useLocalStorage';
 
 const initialState = {
-	isLogIn: getItem("user") ? true : false,
-	userData: getItem("user") ? getItem("user") : {},
+  isLogIn: getItem('user') ? true : false,
+  userData: getItem('user') ? getItem('user') : {},
 };
 
 export const loggedUserSlice = createSlice({
-	name: "isLoggedIn",
-	initialState,
-	reducers: {
-		setLoggedUser: (state, actions) => {
-			state.isLogIn = true;
-			state.userData = { ...actions.payload };
-			setItem("user", state.userData);
-		},
-		updateLoggedUser: (state, actions) => {
-			state.userData = { ...actions.payload };
-			setItem("user", state.userData);
-		},
-		removeLoggedUser: (state) => {
-			state.isLogIn = false;
-			state.userData = {};
-			clearStorage();
-		},
-	},
+  name: 'isLoggedIn',
+  initialState,
+  reducers: {
+    setLoggedUser: (state, actions) => {
+      state.isLogIn = true;
+      state.userData = { ...actions.payload };
+      setItem('user', state.userData);
+    },
+    updateLoggedUser: (state, actions) => {
+      state.userData = { ...actions.payload };
+      setItem('user', state.userData);
+    },
+    removeLoggedUser: (state) => {
+      state.isLogIn = false;
+      state.userData = {};
+      clearStorage();
+    },
+  },
 });
 
-export const { setLoggedUser, updateLoggedUser, removeLoggedUser } = loggedUserSlice.actions;
+export const { setLoggedUser, updateLoggedUser, removeLoggedUser } =
+  loggedUserSlice.actions;
 
 export default loggedUserSlice.reducer;

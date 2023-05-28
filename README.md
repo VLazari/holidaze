@@ -10,31 +10,46 @@ This project focuses solely on the front-end application for the API, while the 
 
 ## Features
 
--   View a list of venues
--   Search for a specific venue
--   View a specific venue page by ID
--   View a calendar with available dates for a venue
--   Register as a customer with a stud.noroff.no email
--   Create bookings at venues as a registered customer
--   View upcoming bookings as a registered customer
--   Register as a venue manager with a stud.noroff.no email
--   Create, update, and delete venues as a registered venue manager
--   View bookings for venues as a registered venue manager
--   Login, update avatar, and logout functionality for registered users
+- View a list of venues
+- Search for a specific venue
+- View a specific venue page by ID
+- View a calendar with available dates for a venue
+- Register as a customer with a stud.noroff.no email
+- Create bookings at venues as a registered customer
+- View upcoming bookings as a registered customer
+- Register as a venue manager with a stud.noroff.no email
+- Create, update, and delete venues as a registered venue manager
+- View bookings for venues as a registered venue manager
+- Login, update avatar, and logout functionality for registered users
 
 ## Technologies Used
 
--   React
--   React Router DOM
--   Redux Toolkit
--   React Redux
--   React Hook Form
--   Yup
--   Leaflet
--   React Leaflet
--   Tailwind CSS
--   Font Awesome
--   Date-fns
+- React
+- React Router DOM
+- Redux Toolkit
+- React Redux
+- React Hook Form
+- Yup
+- Leaflet
+- React Leaflet
+- Tailwind CSS
+- Font Awesome
+- Date-fns
+
+## Testing
+
+The application has been tested using the following technologies and frameworks:
+
+- Jest
+- React Testing Library
+
+The tests cover different components and functionalities of the application to ensure proper behavior and user experience.
+
+To run the tests locally, follow these steps:
+
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Run the tests with `npm test`.
 
 ## Live Deployment
 
@@ -49,8 +64,8 @@ The live deployment of the application can be accessed at: [https://rad-toffee-4
 
 ## Acknowledgments
 
--   Noroff School for providing the project opportunity and guidance.
--   Noroff School for the API integration and documentation.
+- Noroff School for providing the project opportunity and guidance.
+- Noroff School for the API integration and documentation.
 
 ## Contact
 

@@ -8,38 +8,36 @@ import { faStarHalfStroke, faStar } from '@fortawesome/free-solid-svg-icons';
  * @returns jsx component containing star icons
  */
 
-export default function StarAverageRating(props) {
+export default function StarAverageRating({ rating }) {
   return (
     <div className="flex items-center">
       <h3 className="sr-only">Reviews</h3>
-      {props.rating < 1 ? (
-        <p className="ml-1 text-sm font-medium text-slate-900">Not rated</p>
+      {rating < 1 ? (
+        <p className="text-sm font-medium text-slate-900">Not rated</p>
       ) : (
         <>
           {[1, 2, 3, 4, 5].map((rating) =>
-            props.rating >= rating ? (
+            rating >= rating ? (
               <FontAwesomeIcon
                 key={rating}
-                className="mx-0.5 text-sm text-gold-main"
+                className="text-sm text-gold-main"
                 icon={faStar}
               />
-            ) : props.rating < rating && props.rating > rating - 1 ? (
+            ) : rating < rating && rating > rating - 1 ? (
               <FontAwesomeIcon
                 key={rating}
-                className="mx-0.5 text-sm text-gold-main"
+                className="text-sm text-gold-main"
                 icon={faStarHalfStroke}
               />
             ) : (
               <FontAwesomeIcon
                 key={rating}
-                className="mx-0.5 text-sm text-gray-200"
+                className="text-sm text-gray-200"
                 icon={faStar}
               />
             )
           )}
-          <p className="ml-1 text-sm font-medium text-slate-900">
-            ({props.rating})
-          </p>
+          <p className="ml-1 text-sm font-medium text-slate-900">({rating})</p>
         </>
       )}
     </div>

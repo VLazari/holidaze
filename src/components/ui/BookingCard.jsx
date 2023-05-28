@@ -36,13 +36,16 @@ export default function BookingCard({ bookings }) {
                 ) * booking.venue.price;
               return (
                 <li key={booking.id} className="flex flex-wrap py-6">
-                  <div className="h-full w-full sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                  <Link
+                    to={`/venue/${booking.venue.id}`}
+                    className="h-full w-full sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
+                  >
                     <img
                       src={booking.venue.media[0]}
                       alt={booking.venue.name}
                       className="h-full w-full object-cover object-center"
                     />
-                  </div>
+                  </Link>
                   <div className="mx-1 sm:mx-3 flex w-full sm:flex-1 flex-col">
                     <div className="py-3 sm:p-0">
                       <div className="flex justify-between text-base font-medium text-gray-900">

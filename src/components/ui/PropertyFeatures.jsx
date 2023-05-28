@@ -7,8 +7,8 @@ import {
   faWifi,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function PropertyFeatures(props) {
-  const { breakfast, parking, pets, wifi } = props.features;
+export default function PropertyFeatures({ features }) {
+  const { breakfast, parking, pets, wifi } = features;
 
   return (
     <div
