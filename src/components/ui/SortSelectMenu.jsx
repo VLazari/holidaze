@@ -15,7 +15,7 @@ export default function SortSelectMenu({ selectedOption, onChangeOption }) {
       className="flex items-center px-4 sm:px-6 lg:px-8 -mb-10 sm:-mb-20 mt-16 sm:mt-24"
     >
       {({ open }) => (
-        <div className="flex items-center justify-end -mb-20">
+        <div className="flex items-center justify-end">
           <Listbox.Label className="mr-2 text-base font-bold text-gray-900">
             Sort by:{' '}
           </Listbox.Label>

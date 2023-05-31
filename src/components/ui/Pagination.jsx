@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 
 export default function Pagination({ venues, setPageResults }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const venuesPerPage = 16;
+  const venuesPerPage = 20;
   const nrOfPages = Math.ceil(venues.length / venuesPerPage);
   const startIndex = (currentPage - 1) * venuesPerPage;
   const endIndex = currentPage * venuesPerPage;
